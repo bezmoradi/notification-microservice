@@ -1,0 +1,39 @@
+name: Notification Microservice Go Pipeline.
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy-to-digital-ocean:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the repository
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build the image and push to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          platforms: linux/amd64
+          tags: bezmoradi/notification-microservice:latest
+
+      - name: Deploy to DigitalOcean droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.DIGITALOCEAN_SERVER_IPV4}}
+          username: ${{secrets.DIGITALOCEAN_SERVER_USER}}
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          script: |
+            docker stop notification-microservice
+            docker rm notification-microservice
+            docker rmi bezmoradi/notification-microservice:latest
+            docker pull bezmoradi/notification-microservice:latest
+            docker run --network my-network -d --env-file ./env-files/.env.notification --name notification-microservice bezmoradi/notification-microservice:latest
+           
+      

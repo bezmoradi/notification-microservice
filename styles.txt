@@ -1,0 +1,26 @@
+<style>
+    body {
+        font-size: 16px;
+    }
+    h1 {
+        color: #2980b9;
+    }
+    p {
+        font-size: 24px; 
+        line-height: 30px;
+    }
+    ul > li {
+        font-size: 24px; 
+        line-height: 30px;
+    }
+    code {
+        background: #efefef;
+        font-size: 18px;
+    }
+    ul > li > code {
+        padding: 2px;
+    }
+    pre {
+        padding: 7px;
+    }
+</style>
