@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/behzadmoradi/blog-microservices-mail-go/consumer"
-	"github.com/behzadmoradi/blog-microservices-mail-go/helpers"
-	"github.com/behzadmoradi/blog-microservices-mail-go/mailservice"
+	"github.com/bezmoradi/notification-microservice/consumer"
+	"github.com/bezmoradi/notification-microservice/helpers"
+	"github.com/bezmoradi/notification-microservice/mailservice"
 )
 
 func init() {

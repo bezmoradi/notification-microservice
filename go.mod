@@ -1,4 +1,4 @@
-module github.com/behzadmoradi/blog-microservices-mail-go
+module github.com/bezmoradi/notification-microservice
 
 go 1.21.5
 
